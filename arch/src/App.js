@@ -31,15 +31,9 @@ function App() {
   const url='https://fakestoreapi.com/products'
 
   const [data,isLoading,error]=useFetch(url)    //fetched from api
-  const [filteredData,setFilteredData] = useState()
-  const [search, setSearch] = useState()
+  const [filteredData,setFilteredData] = useState(data)
+  const [search, setSearch] = useState("")
   const classes=useStyles(); 
-
-  useEffect(() => {
-    filterData()
-   }, [search])
-
-
 
     function handleAddToBasket(id){  
       let storage = JSON.parse(localStorage.getItem(storageKey))
@@ -66,20 +60,33 @@ function App() {
       }            
       localStorage.setItem(storageKey,JSON.stringify(storage))  
     }
+    function filterData(data){
+      const newData = data.filter((item)=> (item.title).includes(search))  
+      return newData   
 
-function filterData(){      
-    if (data!=undefined && search!=null){
-      let newData = [...data]
-        newData = data.filter(item=> item.title.toLowerCase().includes(search.toLowerCase()))
-        if (newData.length==0) newData=[]
-        console.log(newData)       
-        setFilteredData(newData) 
-      }
     }
 
-    
-    
-   
+    const filterDataAsync = async (data) => {
+      await filterData(data)
+        .then((res)=> setFilteredData(res))
+        .catch(error=> console.log(error))
+    }
+
+    useEffect(() => {
+      filterDataAsync(data)
+    }, [search])
+
+    // function filterProducts(data){
+    //   const newData = data
+    //   if (newData!=undefined){          
+    //       // newData = data.filter((item)=> (item.title).includes(search))      
+    //   }else newData = [0]
+    //   setFilteredData(newData)
+    //   console.log(filteredData)
+    // }
+    // useEffect(() => {
+    //   filterProducts(data)
+    // }, [search])
  
   return (  
     <>   
@@ -93,8 +100,7 @@ function filterData(){
           { !isLoading ?               
                   <Switch>
                     <Route exact path="/">
-                      <Shop data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />
-                     
+                      <Shop data={filteredData} handleAddToBasket={handleAddToBasket} />
                     </Route>
                     <Route exact path="/cart">
                       <Cart />

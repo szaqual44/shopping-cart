@@ -2,7 +2,7 @@
 import React, { useState, useEffect} from 'react'
 import { storageKey } from '../../App';
 import CartItem from './CartItem';
-import useGlobalStyles from '../../styles/globalStyles';
+import useStylesCommon from './style'
 //MATERIAL UI 
 import {makeStyles, } from '@mui/styles'
 import {Container, Grid, Typography,Paper } from '@mui/material'
@@ -10,6 +10,9 @@ import Total from './Total';
 
 
 const useStyles = makeStyles((theme) => ({
+    container:{
+        marginTop:theme.spacing(1), 
+    },   
     underline:{
         borderBottom:"2px solid grey",
     },
@@ -25,16 +28,21 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
+  const tableDescription = {
+    id:null,
+      title:"Product:",
+      image:"",
+      quantity:"Quantity",
+      price:"Price",      
+  }
+
  
 export default function Cart({handleRemoveItem}) {    
     const classes=useStyles();
-    const globalClasses=useGlobalStyles();
-    const [products, setProducts] = useState()    //list of products in cart
+    const classesCommon=useStylesCommon();
+    const [products, setProducts] = useState()
     const [productsLoaded, setProductsLoaded] = useState(false)
     const [totalPrice, setTotalPrice] = useState()
-    
-    
-
     useEffect(() => {       
         setProducts(getCartItems(storageKey))
         setProductsLoaded(true)           
@@ -59,7 +67,7 @@ export default function Cart({handleRemoveItem}) {
     }
     function calculateTotalPrice(){
         let sum=0   
-        if (products!==undefined){
+        if (products!=undefined){
             for (let i=1;i<products.length;i++){
                 sum+=products[i].price*products[i].quantity
             }   
@@ -70,14 +78,14 @@ export default function Cart({handleRemoveItem}) {
   
     
     return (
-        <Container className={globalClasses.container}>
+        <Container className={classes.container}>
         <Grid container spacing={3} className={classes.grid}>
             <Grid item md={8} sm={12} xs={12}>
                 <Paper className={classes.paper}>
                     {/* TITLE */}
                     <Typography variant="h3" className={classes.underline} sx={{mb:8}}> In Your Cart: </Typography>
                     {/* SUBTITLE */}
-                    <Grid container className={globalClasses.gridContainer}>
+                    <Grid container className={classesCommon.gridContainer}>
                         <Grid item xs={2} >                                           
                         </Grid>
                         <Grid item xs={4}>
@@ -86,12 +94,12 @@ export default function Cart({handleRemoveItem}) {
                             </Typography>
                         </Grid>
                         <Grid item xs={2} >
-                            <Typography variant="body2" fontWeight={700} className={globalClasses.gridValue}>    
+                            <Typography variant="body2" fontWeight={700} className={classesCommon.gridValue}>    
                                 Quantity
                             </Typography>
                         </Grid>
                         <Grid item xs={2} >
-                            <Typography variant="body2" fontWeight={700} className={globalClasses.gridValue}>    
+                            <Typography variant="body2" fontWeight={700} className={classesCommon.gridValue}>    
                                Price
                             </Typography>
                         </Grid>

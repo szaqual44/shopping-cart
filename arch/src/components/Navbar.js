@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react'
-import { MyContextToggle } from '../styles/myTheme'
+import { MyContextToggle } from '../customTheme/myTheme'
 //MATERIAL UI 
 
 import SearchIcon from '@mui/icons-material/Search';
 import {makeStyles} from '@mui/styles'
-import {AppBar, Button, Toolbar, Typography,InputBase} from '@mui/material'
+import {AppBar, Button, Toolbar, Typography,InputBase, Paper} from '@mui/material'
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { Cancel } from '@mui/icons-material';
 
@@ -96,7 +96,7 @@ export default function Navbar({search, setSearch}) {
                             value={search}
                             onChange={(e)=>{
                                 setSearch(e.target.value)
-                                // console.log(search)
+                                console.log(search)
                             }}
                             
                             />

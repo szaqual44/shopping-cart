@@ -4,10 +4,6 @@ import { createTheme ,ThemeProvider } from '@mui/material/styles';
 // import { ThemeProvider } from '@material-ui/core/styles';
 
 export const MyContextToggle = React.createContext()
-export const SideMenu = React.createContext()
-
-const leftMenuBig = 180
-const leftMenuSmall = 100
 
  const lightMode=createTheme({
     palette:{
@@ -47,17 +43,14 @@ function MyTheme({children}){
     return(
         <ThemeProvider theme={isDark ? darkMode : lightMode}>
              <MyContextToggle.Provider value={toggleContext}>
-                <SideMenu.Provider value={leftMenuSmall}>
+             
                     {children}
-                </SideMenu.Provider>
+             
             </MyContextToggle.Provider>
         </ThemeProvider>
     )
 }
-
-
-
-  
-
-
 export default MyTheme
+
+
+
