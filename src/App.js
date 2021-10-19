@@ -40,7 +40,6 @@ function App() {
    }, [search])
 
    
-
     function handleAddToBasket(id){  
       let storage = JSON.parse(localStorage.getItem(storageKey))
       // console.log('downloaded from local storage storage',storage)
