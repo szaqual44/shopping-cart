@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
         height:"100vh",  
     },
     aside:{
-        position:"static",
+        position:"fixed",
         backgroundColor:theme.palette.secondary.main,
     },
     textBox:{

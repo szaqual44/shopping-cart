@@ -67,6 +67,23 @@ export default function Cart({handleRemoveItem}) {
             setTotalPrice(sum)
         }        
     }
+    function handleIncreaseItem(id){
+        let newArray = [...products]
+        newArray.forEach(item=>{
+            if (item.id === id) item.quantity++
+        })    
+        setProducts(newArray)
+    }
+    function handleDecreaseItem(id){
+        let newArray = [...products]
+        newArray.forEach(item=>{
+            if (item.id === id){
+               
+               if (item.quantity>1) item.quantity--
+            } 
+        })    
+        setProducts(newArray)
+    }
   
     
     return (
@@ -105,7 +122,8 @@ export default function Cart({handleRemoveItem}) {
                         item={item} 
                         className={classes.cartItem} 
                         handleRemoveItem={handleRemoveItem}     
-                        setProducts={setProducts}                   
+                        handleIncreaseItem={handleIncreaseItem} 
+                        handleDecreaseItem={handleDecreaseItem}               
                        />                 
                     )) : null}
                 </Paper>
