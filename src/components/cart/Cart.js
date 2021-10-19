@@ -33,7 +33,6 @@ export default function Cart({handleRemoveItem}) {
     const [totalPrice, setTotalPrice] = useState()
     
     
-
     useEffect(() => {       
         setProducts(getCartItems(storageKey))
         setProductsLoaded(true)           
