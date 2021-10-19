@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
             display:"none",
           },
     },
-  
   }));
 
 export default function LeftMenu() {

@@ -8,7 +8,6 @@ import useGlobalStyles from '../styles/globalStyles'
 import {makeStyles} from '@mui/styles'
 import {Paper, Typography, Button, Container } from '@mui/material'
 
-
 const useStyles = makeStyles((theme) => ({    
     paper:{
         padding:theme.spacing(2),

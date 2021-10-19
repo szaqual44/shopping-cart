@@ -30,7 +30,6 @@ export default function QuantityField({item, handleIncreaseItem, handleDecreaseI
                 sx={{ fontSize: 20 , ml:1}} 
                 onClick={()=>incItem(item.id)} 
                 className={classes.icon}
-
                 />
         </div>
     )

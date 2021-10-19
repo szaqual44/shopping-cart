@@ -8,7 +8,6 @@ import {makeStyles, } from '@mui/styles'
 import {Container, Grid, Typography,Paper } from '@mui/material'
 import Total from './Total';
 
-
 const useStyles = makeStyles((theme) => ({
     underline:{
         borderBottom:"2px solid grey",
