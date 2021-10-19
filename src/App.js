@@ -85,8 +85,7 @@ function filterData(){
     <>   
 
     <Router>
-      <Navbar search={search} setSearch={setSearch}/>         
-           
+      <Navbar search={search} setSearch={setSearch}/> 
       <div className={classes.container}>
         <LeftMenu /> 
           {/* <div className={classes.placeholder}/> */}
