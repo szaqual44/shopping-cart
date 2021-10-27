@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Loading from "./components/Loading";
 import Cart from "./components/cart/Cart";
 import Contact from "./components/Contact";
-import Login from './components/Login';
+import Login from './components/SignUp';
 
 //MATERIA UI
 import {makeStyles} from '@mui/styles'
@@ -31,7 +31,10 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const url='https://fakestoreapi.com/products'
 
-  const [data,isLoading,error]=useFetch(url)    //fetched from api
+  // const [data,isLoading,error]=useFetch(url)    //fetched from api
+  const [isLoading,setIsLoading]=useState(false)   //aux do wywalenia
+  const data = 4
+  
   const [filteredData,setFilteredData] = useState()
   const [search, setSearch] = useState()
   
@@ -40,9 +43,9 @@ function App() {
 
   const classes=useStyles({windowWidth}); 
 
-  useEffect(() => {
-    filterData()
-   }, [search])
+  // useEffect(() => {
+  //   filterData()
+  //  }, [search])
 
 
     function handleAddToBasket(id){  
@@ -71,15 +74,15 @@ function App() {
       localStorage.setItem(storageKey,JSON.stringify(storage))  
     }
 
-function filterData(){      
-    if (data!=undefined && search!=null){
-      let newData = [...data]
-        newData = data.filter(item=> item.title.toLowerCase().includes(search.toLowerCase()))
-        if (newData.length==0) newData=[]
-        console.log(newData)       
-        setFilteredData(newData) 
-      }
-    }
+// function filterData(){      
+//     if (data!=undefined && search!=null){
+//       let newData = [...data]
+//         newData = data.filter(item=> item.title.toLowerCase().includes(search.toLowerCase()))
+//         if (newData.length==0) newData=[]
+//         console.log(newData)       
+//         setFilteredData(newData) 
+//       }
+//     }
 
     
     
@@ -96,7 +99,7 @@ function filterData(){
             <AuthProvider>               
               <Switch>
                 <Route exact path="/">
-                  <Shop data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />                     
+                  {/* <Shop data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />                      */}
                 </Route>
                 <Route exact path="/cart">
                   <Cart />

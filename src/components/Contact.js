@@ -9,11 +9,7 @@ import useWindowSize from '../auxiliary/useWindowSize'
 import {makeStyles} from '@mui/styles'
 import {Paper, Typography, Button, Container } from '@mui/material'
 
-const useStyles = makeStyles((theme) => ({    
-    paper:{
-        padding:theme.spacing(2),
-        minHeight:"400px",   
-    },
+const useStyles = makeStyles((theme) => ({       
     active:{
       backgroundColor:"#e6ebe6"  
     },
@@ -91,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
     const globalClasses=useGlobalStyles({windowWidth});
     return (
         <div className={globalClasses.container}>
-            <Paper className={classes.paper}>
+            <Paper className={globalClasses.paper}>
                 <Typography variant="h3" className={globalClasses.underline} sx={{mb:8}}> Send us email </Typography>                
                 <Form 
                     onSubmit={handleContactSubmit}
