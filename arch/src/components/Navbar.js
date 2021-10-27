@@ -101,8 +101,7 @@ export default function Navbar({search, setSearch}) {
                             onChange={(e)=>{
                                 setSearch(e.target.value)
                                 // console.log(search)
-                            }}
-                            
+                            }}                            
                             />
                     </div>
                     <div className={classes.cancel}>
@@ -121,5 +120,5 @@ export default function Navbar({search, setSearch}) {
         </AppBar>
    
         </>
-    )
+    ) 
 }

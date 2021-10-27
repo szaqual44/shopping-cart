@@ -9,10 +9,7 @@ import {makeStyles, } from '@mui/styles'
 import {Container, Grid, Typography,Paper } from '@mui/material'
 import Total from './Total';
 
-const useStyles = makeStyles((theme) => ({
-    underline:{
-        borderBottom:"2px solid grey",
-    },
+const useStyles = makeStyles((theme) => ({   
     cartItem:{
         marginBottom:"20px"
     },
@@ -96,7 +93,7 @@ export default function Cart({handleRemoveItem}) {
             <Grid item md={8} sm={12} xs={12}>
                 <Paper className={classes.paper}>
                     {/* TITLE */}
-                    <Typography variant="h3" className={classes.underline} sx={{mb:8}}> In Your Cart: </Typography>
+                    <Typography variant="h3" className={globalClasses.underline} sx={{mb:8}}> In Your Cart: </Typography>
                     {/* SUBTITLE */}
                     <Grid container className={globalClasses.gridContainer}>
                         <Grid item xs={2} >                                           

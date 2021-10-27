@@ -14,9 +14,6 @@ const useStyles = makeStyles((theme) => ({
         padding:theme.spacing(2),
         minHeight:"400px",   
     },
-    underline:{
-        borderBottom:"2px solid grey",
-    },   
     active:{
       backgroundColor:"#e6ebe6"  
     },
@@ -95,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     return (
         <div className={globalClasses.container}>
             <Paper className={classes.paper}>
-                <Typography variant="h3" className={classes.underline} sx={{mb:8}}> Send us email </Typography>                
+                <Typography variant="h3" className={globalClasses.underline} sx={{mb:8}}> Send us email </Typography>                
                 <Form 
                     onSubmit={handleContactSubmit}
                     validate={required}

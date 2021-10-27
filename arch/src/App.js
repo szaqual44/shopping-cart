@@ -12,6 +12,7 @@ import Login from './components/Login';
 
 //MATERIA UI
 import {makeStyles} from '@mui/styles'
+import AuthProvider from './auxiliary/AuthContext';
 export const storageKey="inCart"
 
 export const leftMenuWidthBig = 200
@@ -91,23 +92,24 @@ function filterData(){
       <Navbar search={search} setSearch={setSearch}/> 
       <div className={classes.container}>
         <LeftMenu />           
-          { !isLoading ?               
-                  <Switch>
-                    <Route exact path="/">
-                      <Shop data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />
-                     
-                    </Route>
-                    <Route exact path="/cart">
-                      <Cart />
-                    </Route>
-                    <Route exact path="/contact">
-                      <Contact/>
-                    </Route>
-                    <Route exact path="/login">
-                      <Login/>
-                    </Route>
-                  </Switch>               
-              : <Loading/>}
+          { !isLoading ?
+            <AuthProvider>               
+              <Switch>
+                <Route exact path="/">
+                  <Shop data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />                     
+                </Route>
+                <Route exact path="/cart">
+                  <Cart />
+                </Route>
+                <Route exact path="/contact">
+                  <Contact/>
+                </Route>
+                <Route exact path="/login">
+                  <Login/>
+                </Route>
+              </Switch> 
+              </AuthProvider>              
+          : <Loading/>}
       </div>
     </Router>
  
