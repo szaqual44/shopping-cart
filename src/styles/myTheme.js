@@ -36,13 +36,18 @@ export const MyContextToggle = React.createContext()
 
 function MyTheme({children}){
     const [isDark,setIsDark] = useState(false)
+    
     function toggleContext(){
         setIsDark(dark=>!dark)
         console.log(isDark)
     }
+    const modeContext ={
+        toggleContext,
+        isDark
+    }
     return(
         <ThemeProvider theme={isDark ? darkMode : lightMode}>
-             <MyContextToggle.Provider value={toggleContext}>
+             <MyContextToggle.Provider value={modeContext}>
              
                     {children}
              

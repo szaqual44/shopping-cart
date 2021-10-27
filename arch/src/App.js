@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import  {useContext, useState,useEffect} from 'react'
-
+import  {useState,useEffect} from 'react'
+import useWindowSize from './auxiliary/useWindowSize';
 import useFetch from './auxiliary/useFetch'
 import Shop from "./components/shop/Shop";
 import LeftMenu from "./components/LeftMenu";
@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Loading from "./components/Loading";
 import Cart from "./components/cart/Cart";
 import Contact from "./components/Contact";
-
+import Login from './components/Login';
 
 //MATERIA UI
 import {makeStyles} from '@mui/styles'
@@ -17,23 +17,32 @@ export const storageKey="inCart"
 export const leftMenuWidthBig = 200
 export const leftMenuWidthSmall = 100
 
+
 const useStyles = makeStyles((theme) => ({
   container:{
     display:"flex",
     flexDirection:"row",
   },
   placeholder:{   
-    width:"200px",
-    height:"100vh"
+    width:({windowWidth})=>windowWidth> 900 ? 160 : 56,
   }
 }));
 function App() {
   const url='https://fakestoreapi.com/products'
 
   const [data,isLoading,error]=useFetch(url)    //fetched from api
-  const [filteredData,setFilteredData] = useState(data)
-  const [search, setSearch] = useState("")
-  const classes=useStyles(); 
+  const [filteredData,setFilteredData] = useState()
+  const [search, setSearch] = useState()
+  
+  const size = useWindowSize();
+  let windowWidth = size.width
+
+  const classes=useStyles({windowWidth}); 
+
+  useEffect(() => {
+    filterData()
+   }, [search])
+
 
     function handleAddToBasket(id){  
       let storage = JSON.parse(localStorage.getItem(storageKey))
@@ -60,53 +69,42 @@ function App() {
       }            
       localStorage.setItem(storageKey,JSON.stringify(storage))  
     }
-    function filterData(data){
-      const newData = data.filter((item)=> (item.title).includes(search))  
-      return newData   
 
+function filterData(){      
+    if (data!=undefined && search!=null){
+      let newData = [...data]
+        newData = data.filter(item=> item.title.toLowerCase().includes(search.toLowerCase()))
+        if (newData.length==0) newData=[]
+        console.log(newData)       
+        setFilteredData(newData) 
+      }
     }
 
-    const filterDataAsync = async (data) => {
-      await filterData(data)
-        .then((res)=> setFilteredData(res))
-        .catch(error=> console.log(error))
-    }
-
-    useEffect(() => {
-      filterDataAsync(data)
-    }, [search])
-
-    // function filterProducts(data){
-    //   const newData = data
-    //   if (newData!=undefined){          
-    //       // newData = data.filter((item)=> (item.title).includes(search))      
-    //   }else newData = [0]
-    //   setFilteredData(newData)
-    //   console.log(filteredData)
-    // }
-    // useEffect(() => {
-    //   filterProducts(data)
-    // }, [search])
+    
+    
+   
  
   return (  
     <>   
 
     <Router>
-      <Navbar search={search} setSearch={setSearch}/>         
-           
+      <Navbar search={search} setSearch={setSearch}/> 
       <div className={classes.container}>
-        <LeftMenu /> 
-          {/* <div className={classes.placeholder}/> */}
+        <LeftMenu />           
           { !isLoading ?               
                   <Switch>
                     <Route exact path="/">
-                      <Shop data={filteredData} handleAddToBasket={handleAddToBasket} />
+                      <Shop data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />
+                     
                     </Route>
                     <Route exact path="/cart">
                       <Cart />
                     </Route>
                     <Route exact path="/contact">
                       <Contact/>
+                    </Route>
+                    <Route exact path="/login">
+                      <Login/>
                     </Route>
                   </Switch>               
               : <Loading/>}

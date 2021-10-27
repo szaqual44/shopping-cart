@@ -1,6 +1,7 @@
 import React from 'react'
 import Item from './Item';
 import useGlobalStyles from '../../styles/globalStyles';
+import useWindowSize from '../../auxiliary/useWindowSize';
 //MATERIAL UI 
 
 import { Grid, } from '@mui/material'
@@ -12,7 +13,9 @@ import { Grid, } from '@mui/material'
 export default function Shop({data, handleAddToBasket}) {
 
     //const classes=useStyles();
-    const globalClasses=useGlobalStyles();
+    const size = useWindowSize();
+    let windowWidth = size.width
+    const globalClasses=useGlobalStyles({windowWidth});
     return (
         <>
         <div className={globalClasses.container}>

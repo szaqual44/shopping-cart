@@ -2,6 +2,7 @@
 import React from 'react'
 import { Form, Field } from 'react-final-form'
 import useGlobalStyles from '../styles/globalStyles'
+import useWindowSize from '../auxiliary/useWindowSize'
 //MATERIAL UI 
 
 
@@ -88,9 +89,11 @@ const useStyles = makeStyles((theme) => ({
 
  export default function Contact() {
     const classes=useStyles();
-    const globalClasses=useGlobalStyles();
+    const size = useWindowSize();
+    let windowWidth = size.width
+    const globalClasses=useGlobalStyles({windowWidth});
     return (
-        <Container className={globalClasses.container}>
+        <div className={globalClasses.container}>
             <Paper className={classes.paper}>
                 <Typography variant="h3" className={classes.underline} sx={{mb:8}}> Send us email </Typography>                
                 <Form 
@@ -167,7 +170,7 @@ const useStyles = makeStyles((theme) => ({
 
                 </Form>
             </Paper>   
-        </Container>
+        </div>
     )
 }
 

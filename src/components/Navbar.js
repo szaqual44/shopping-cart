@@ -1,12 +1,13 @@
 import React, {useContext, useState} from 'react'
 import { MyContextToggle } from '../styles/myTheme'
+import { Link } from 'react-router-dom';
 //MATERIAL UI 
-
 import SearchIcon from '@mui/icons-material/Search';
 import {makeStyles} from '@mui/styles'
 import {AppBar, Button, Toolbar, Typography,InputBase} from '@mui/material'
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { Cancel } from '@mui/icons-material';
+import PersonIcon from '@mui/icons-material/Person';
 
 const useStyles = makeStyles((theme) => ({
     titleLg: {
@@ -66,13 +67,16 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down("sm")]: {
             display:"flex",
           },
+    },
+    button:{
+        color:"white"
     }
   }));
 
 
 export default function Navbar({search, setSearch}) {
     const [open,setOpen] = useState(false)
-    const toggleContext = useContext(MyContextToggle)
+ 
     const classes=useStyles({open});
     return (
         <>
@@ -109,12 +113,9 @@ export default function Navbar({search, setSearch}) {
                     <div className={classes.search}>
                         <SearchIcon onClick={()=>setOpen(true)}/>
                     </div>
-                    <Button                 
-                    onClick={()=>toggleContext()}
-                    variant="contained"
-                    sx={{ml:2}}>
-                        Mode
-                    </Button>
+                    <Link to="/login" className={classes.button}>
+                       <PersonIcon/>
+                    </Link>
                 </div>                
             </Toolbar>
         </AppBar>

@@ -1,29 +1,18 @@
 
-import React, { useState} from 'react'
+import React from 'react'
 import { Form, Field } from 'react-final-form'
+import useGlobalStyles from '../styles/globalStyles'
+import useWindowSize from '../auxiliary/useWindowSize'
 //MATERIAL UI 
 
 
 import {makeStyles} from '@mui/styles'
-import {Paper, Typography, Button } from '@mui/material'
+import {Paper, Typography, Button, Container } from '@mui/material'
 
-
-const useStyles = makeStyles((theme) => ({
-    container:{
-        position:"relative",
-        left:0,
-        right:0,
-        margin:"auto",
-        marginTop:theme.spacing(3),
-        width:"40%",
-        [theme.breakpoints.down('md')]: {
-            width:"100%",            
-          },
-    },
+const useStyles = makeStyles((theme) => ({    
     paper:{
-        padding:theme.spacing(3),
-        minHeight:"400px",
-        backgroundColor:"#222",    
+        padding:theme.spacing(2),
+        minHeight:"400px",   
     },
     underline:{
         borderBottom:"2px solid grey",
@@ -100,9 +89,11 @@ const useStyles = makeStyles((theme) => ({
 
  export default function Contact() {
     const classes=useStyles();
-
+    const size = useWindowSize();
+    let windowWidth = size.width
+    const globalClasses=useGlobalStyles({windowWidth});
     return (
-        <main className={classes.container}>
+        <div className={globalClasses.container}>
             <Paper className={classes.paper}>
                 <Typography variant="h3" className={classes.underline} sx={{mb:8}}> Send us email </Typography>                
                 <Form 
@@ -178,34 +169,8 @@ const useStyles = makeStyles((theme) => ({
                     }
 
                 </Form>
-
-
-            
-        
-
-            </Paper>
-   
-        </main>
+            </Paper>   
+        </div>
     )
 }
 
-
-
-// <Form
-//                     onSubmit={handleSubmit}
-//                     initialValues={{
-//                     ...formData,
-//                     }}
-//                     render={({ handleSubmit, form, submitting, pristine, values }) => (
-//                     <form onSubmit={handleSubmit} className={classes.form}>
-//                         <div>
-//                         <label>First Name</label>
-//                         <Field
-//                             name="firstName"
-//                             component="input"
-//                             type="text"
-//                             placeholder="First Name"
-//                         />
-//                         </div>
-//                         </form>
-//                     )} />

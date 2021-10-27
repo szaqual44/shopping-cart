@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import  {useContext, useState,useEffect} from 'react'
-
+import  {useState,useEffect} from 'react'
+import useWindowSize from './auxiliary/useWindowSize';
 import useFetch from './auxiliary/useFetch'
 import Shop from "./components/shop/Shop";
 import LeftMenu from "./components/LeftMenu";
@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Loading from "./components/Loading";
 import Cart from "./components/cart/Cart";
 import Contact from "./components/Contact";
-
+import Login from './components/Login';
 
 //MATERIA UI
 import {makeStyles} from '@mui/styles'
@@ -17,14 +17,14 @@ export const storageKey="inCart"
 export const leftMenuWidthBig = 200
 export const leftMenuWidthSmall = 100
 
+
 const useStyles = makeStyles((theme) => ({
   container:{
     display:"flex",
     flexDirection:"row",
   },
   placeholder:{   
-    width:"200px",
-    height:"100vh"
+    width:({windowWidth})=>windowWidth> 900 ? 160 : 56,
   }
 }));
 function App() {
@@ -33,7 +33,11 @@ function App() {
   const [data,isLoading,error]=useFetch(url)    //fetched from api
   const [filteredData,setFilteredData] = useState()
   const [search, setSearch] = useState()
-  const classes=useStyles(); 
+  
+  const size = useWindowSize();
+  let windowWidth = size.width
+
+  const classes=useStyles({windowWidth}); 
 
   useEffect(() => {
     filterData()
@@ -86,8 +90,7 @@ function filterData(){
     <Router>
       <Navbar search={search} setSearch={setSearch}/> 
       <div className={classes.container}>
-        <LeftMenu /> 
-          {/* <div className={classes.placeholder}/> */}
+        <LeftMenu />           
           { !isLoading ?               
                   <Switch>
                     <Route exact path="/">
@@ -99,6 +102,9 @@ function filterData(){
                     </Route>
                     <Route exact path="/contact">
                       <Contact/>
+                    </Route>
+                    <Route exact path="/login">
+                      <Login/>
                     </Route>
                   </Switch>               
               : <Loading/>}

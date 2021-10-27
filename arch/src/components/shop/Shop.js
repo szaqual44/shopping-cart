@@ -1,29 +1,29 @@
 import React from 'react'
 import Item from './Item';
+import useGlobalStyles from '../../styles/globalStyles';
+import useWindowSize from '../../auxiliary/useWindowSize';
 //MATERIAL UI 
 
-import {makeStyles} from '@mui/styles'
 import { Grid, } from '@mui/material'
-
-const useStyles = makeStyles((theme) => ({
-   container:{
-    margin:0,
-    padding:theme.spacing(2),
-    backgroundColor:"lightgrey"
-   }   
-  }));
+// import {makeStyles} from '@mui/styles'
+// const useStyles = makeStyles((theme) => ({  
+//   }));
 
 
-export default function Shop({data, handleAddToBasket, handleRemoveItem}) {
+export default function Shop({data, handleAddToBasket}) {
 
-    const classes=useStyles();
+    //const classes=useStyles();
+    const size = useWindowSize();
+    let windowWidth = size.width
+    const globalClasses=useGlobalStyles({windowWidth});
     return (
         <>
-        <div className={classes.container}>
+        <div className={globalClasses.container}>
+        
           <Grid 
           container
           spacing={5}  
-          >
+          >          
             {data.map((item)=>(
               <Grid item              
                 xs={12} 
@@ -33,7 +33,7 @@ export default function Shop({data, handleAddToBasket, handleRemoveItem}) {
                   <Item item={item} key={item.id} handleAddToBasket={handleAddToBasket} />
               </Grid>          
             ))}      
-        </Grid>
+          </Grid>
         </div>
 
         </>

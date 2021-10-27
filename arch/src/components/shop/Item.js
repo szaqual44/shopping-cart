@@ -7,8 +7,7 @@ const useStyles=makeStyles((theme)=>({
     itemsContainer:{
         display:'flex',
         width:"100%",
-        padding:theme.spacing(3),
-   
+        padding:theme.spacing(3),   
     },  
     img:{
         width:"160px",  

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import useStylesCommon from './style'
+import useGlobalStyles from '../../styles/globalStyles';
 //MATERIAL UI 
 import {makeStyles} from '@mui/styles'
 import { Typography, Grid } from '@mui/material';
@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function CartItem({item,handleRemoveItem}) {
+export default function CartItem({item, handleRemoveItem, handleIncreaseItem , handleDecreaseItem}) {
 
     const classes=useStyles();
-    const classesCommon=useStylesCommon();
+    const classesCommon=useGlobalStyles();
     return (
         <>          
             <Grid container className={classesCommon.gridContainer}>
@@ -45,8 +45,7 @@ export default function CartItem({item,handleRemoveItem}) {
                 </Grid>
                 <Grid item xs={2} >
                     <Typography variant="body2" fontWeight={300} className={classesCommon.gridValue}>    
-                       
-                        <QuantityField item={item}/>
+                        <QuantityField item={item} handleIncreaseItem={handleIncreaseItem} handleDecreaseItem={handleDecreaseItem}/>
                     </Typography>
                 </Grid>
                 <Grid item xs={2} >

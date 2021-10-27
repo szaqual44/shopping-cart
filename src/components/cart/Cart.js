@@ -3,6 +3,7 @@ import React, { useState, useEffect} from 'react'
 import { storageKey } from '../../App';
 import CartItem from './CartItem';
 import useGlobalStyles from '../../styles/globalStyles';
+import useWindowSize from '../../auxiliary/useWindowSize';
 //MATERIAL UI 
 import {makeStyles, } from '@mui/styles'
 import {Container, Grid, Typography,Paper } from '@mui/material'
@@ -27,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
  
 export default function Cart({handleRemoveItem}) {    
     const classes=useStyles();
-    const globalClasses=useGlobalStyles();
+    const size = useWindowSize();
+    let windowWidth = size.width
+    const globalClasses=useGlobalStyles({windowWidth});
     const [products, setProducts] = useState()    //list of products in cart
     const [productsLoaded, setProductsLoaded] = useState(false)
     const [totalPrice, setTotalPrice] = useState()
@@ -58,7 +61,7 @@ export default function Cart({handleRemoveItem}) {
     function calculateTotalPrice(){
         let sum=0   
         if (products!==undefined){
-            for (let i=1;i<products.length;i++){
+            for (let i=0;i<products.length;i++){
                 sum+=products[i].price*products[i].quantity
             }   
             sum=Math.round(sum * 100) / 100
@@ -69,23 +72,26 @@ export default function Cart({handleRemoveItem}) {
         let newArray = [...products]
         newArray.forEach(item=>{
             if (item.id === id) item.quantity++
+            calculateTotalPrice()
         })    
         setProducts(newArray)
+      
     }
     function handleDecreaseItem(id){
         let newArray = [...products]
         newArray.forEach(item=>{
-            if (item.id === id){
-               
+            if (item.id === id){               
                if (item.quantity>1) item.quantity--
+               calculateTotalPrice()
             } 
         })    
         setProducts(newArray)
+        
     }
   
     
     return (
-        <Container className={globalClasses.container}>
+        <div className={globalClasses.container}>
         <Grid container spacing={3} className={classes.grid}>
             <Grid item md={8} sm={12} xs={12}>
                 <Paper className={classes.paper}>
@@ -133,7 +139,7 @@ export default function Cart({handleRemoveItem}) {
         </Grid>
        
    
-        </Container>
+        </div>
     )
 }
 

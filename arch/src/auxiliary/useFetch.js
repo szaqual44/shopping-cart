@@ -14,7 +14,7 @@ export default function useFetch(url) {
                setIsLoading(false)        
            })
            .catch(error=>{
-               console.log(error)
+            //    console.log(error)
                setError(error)
            })                    
    }
@@ -26,7 +26,7 @@ export default function useFetch(url) {
     if (data!=undefined){
         const newArray = [...data]
         newArray.map(item=>item.quantity=0)
-        console.log(data)
+        // console.log(data)
         }       
     }
 
