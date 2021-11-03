@@ -36,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
        border:"1px solid red",
        borderRadius:"3px"
     },
-
+    relative:{
+        position:'relative'
+    },
     required:{         
         position:"absolute",
         right:10,
@@ -101,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
                             >
                                 {({input, meta,placeholder})=>(
                                     <div className={` ${meta.active ? classes.active : ''}`}>
-                                         <div>
+                                         <div className={classes.relative}>
                                             {meta.error && meta.touched && <span className={classes.required}>{meta.error}</span>}
                                         </div>
                                         <div className={classes.fieldContainer}>
@@ -121,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
                             >
                                 {({input, meta,placeholder})=>(
                                     <div className={` ${meta.active ? classes.active : ''}`}>
-                                         <div>
+                                         <div className={classes.relative}>
                                             {meta.error && meta.touched && <span className={classes.required}>{meta.error}</span>}
                                         </div>
                                         <div className={classes.fieldContainer}>
@@ -145,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
                                                 <label style={{marginBottom:20}}> Massage </label>                                        
                                                 <textarea {...input} placeholder={placeholder} className={meta.error && meta.touched ?classes.input : ''}/>
                                             </div>                                   
-                                            <div>
+                                            <div className={classes.relative}>
                                                 {meta.error && meta.touched && <span className={classes.required}>{meta.error}</span>}
                                             </div>
                                         </div>                                    

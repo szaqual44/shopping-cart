@@ -13,17 +13,17 @@ export default function useFetch(url) {
                setData(response.data)
                setIsLoading(false)        
            })
-           .catch(error=>{
-            //    console.log(error)
+           .catch(error=>{               
                setError(error)
+               console.log(error)
            })                    
    }
     // adding a new key: quantity
     async function addQuantity(){
-        const response = await addQuan()
+         await addQuan()
     }
     function addQuan(){
-    if (data!=undefined){
+    if (data!==undefined){
         const newArray = [...data]
         newArray.map(item=>item.quantity=0)
         // console.log(data)

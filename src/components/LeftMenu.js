@@ -1,5 +1,6 @@
 import React, { useState, useContext} from 'react'
 import { MyContextToggle } from '../styles/myTheme'
+import useGlobalStyles from '../styles/globalStyles'
 //MATERIAL UI 
 import {makeStyles} from '@mui/styles'
 import { Button, List, ListItem, Typography } from '@mui/material'
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LeftMenu() {
     const {toggleContext, isDark} = useContext(MyContextToggle)
     const classes=useStyles();
+    const globalClasses=useGlobalStyles();
     
     return (  
             <aside className={classes.aside}>                 
@@ -52,16 +54,15 @@ export default function LeftMenu() {
                                 </ListItem>
                             </Link>
                         ))}
-                    </div>
+                    </div>                 
                     <Button                 
                         onClick={()=>toggleContext()}
                         variant="contained"   
-                        className={classes.button}  
                         color="secondary"                 
                     >
-                        {isDark ?<WbSunnyIcon/>:<DarkModeIcon/>}
-                          
-                    </Button>                                 
+                        {isDark ?<WbSunnyIcon/>:<DarkModeIcon/>}                          
+                    </Button> 
+                                       
                 </List>                 
             </aside>   
     )

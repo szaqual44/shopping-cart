@@ -2,7 +2,7 @@ import React from 'react'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { makeStyles } from '@mui/styles';
-import { DeviceThermostat } from '@mui/icons-material';
+
 
 const useStyles = makeStyles((theme) => ({
     container:{

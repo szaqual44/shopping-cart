@@ -6,7 +6,7 @@ import useGlobalStyles from '../../styles/globalStyles';
 import useWindowSize from '../../auxiliary/useWindowSize';
 //MATERIAL UI 
 import {makeStyles, } from '@mui/styles'
-import {Container, Grid, Typography,Paper } from '@mui/material'
+import { Grid, Typography,Paper } from '@mui/material'
 import Total from './Total';
 
 const useStyles = makeStyles((theme) => ({   

@@ -15,13 +15,20 @@ const useStyles = makeStyles((theme) => ({
     textAlign:"center"
 },
   }));
-export default function Loading() {
+export default function Loading({error}) {
     const classes=useStyles();
     const globalClasses=useGlobalStyles();
   return (
     <div className={globalClasses.container} className={classes.center}>
         <CircularProgress sx={{mb:5}}/>
-        <Typography variant="h4"> Loading... </Typography>
+        {error 
+        ? <Typography variant="h4"> 
+           {error.message}
+          </Typography>
+        :<Typography variant="h4"> 
+          Loading... 
+        </Typography>}
+          
     </div>
   );
 }

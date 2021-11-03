@@ -1,13 +1,12 @@
 import React, {useContext, useState} from 'react'
-import { MyContextToggle } from '../styles/myTheme'
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation  } from 'react-router-dom';
+import { AuthContext } from '../auxiliary/AuthContext'
 //MATERIAL UI 
-import SearchIcon from '@mui/icons-material/Search';
 import {makeStyles} from '@mui/styles'
-import {AppBar, Button, Toolbar, Typography,InputBase} from '@mui/material'
+import {AppBar, Toolbar, Typography, InputBase, Button} from '@mui/material'
 import StorefrontIcon from '@mui/icons-material/Storefront';
+import SearchIcon from '@mui/icons-material/Search';
 import { Cancel } from '@mui/icons-material';
-import PersonIcon from '@mui/icons-material/Person';
 
 const useStyles = makeStyles((theme) => ({
     titleLg: {
@@ -70,14 +69,38 @@ const useStyles = makeStyles((theme) => ({
     },
     button:{
         color:"white"
-    }
+    },
+    loggedContainer:{
+        display:"flex", 
+    },
+    loggedUser:{
+        maxWidth:100,
+        fontSize:10,
+        textAlign:"center"
+    }    
   }));
 
 
 export default function Navbar({search, setSearch}) {
     const [open,setOpen] = useState(false)
- 
-    const classes=useStyles({open});
+    const {currentUser, logout} = useContext(AuthContext)
+    const [error, setError] = useState('')
+
+    const classes=useStyles({open});    
+    const history = useHistory();
+    const location = useLocation()
+    
+    async function handleLogOut(){
+        try {
+            setError('')          
+            await logout()
+            history.push("/")
+            
+        } catch {
+            setError("failed to log out")
+        }
+    }
+    
     return (
         <>
         <AppBar position="sticky" color="primary">
@@ -91,34 +114,55 @@ export default function Navbar({search, setSearch}) {
                         STORE
                     </Typography>
                 </div>
-                <div className={classes.searchBox}>                   
-                    <div className={classes.inputContainer}>
-                        <SearchIcon />
-                        <InputBase  
-                            placeholder="Search..." 
-                            className={classes.inputSearch}
-                            value={search}
-                            onChange={(e)=>{
-                                setSearch(e.target.value)
-                                // console.log(search)
-                            }}                            
-                            />
-                    </div>
-                    <div className={classes.cancel}>
-                        <Cancel  onClick={()=>setOpen(false)}/>
-                    </div>
-                </div>
+                { location.pathname=='/' 
+                    ?   <div className={classes.searchBox}>                   
+                            <div className={classes.inputContainer}>
+                                <SearchIcon />
+                                <InputBase  
+                                    placeholder="Search..." 
+                                    className={classes.inputSearch}
+                                    value={search}
+                                    onChange={(e)=>{
+                                        setSearch(e.target.value)
+                                    }}                            
+                                    />
+                            </div>
+                            <div className={classes.cancel}>
+                                <Cancel  onClick={()=>setOpen(false)}/>
+                            </div>
+                        </div>
+                    :   null}
                 <div className={classes.buttonWrapper}>
                     <div className={classes.search}>
                         <SearchIcon onClick={()=>setOpen(true)}/>
                     </div>
-                    <Link to="/login" className={classes.button}>
-                       <PersonIcon/>
-                    </Link>
-                </div>                
+                    
+                    <div className={classes.loggedContainer}>                       
+                        <Link to="/login" className={classes.button}>
+                            {currentUser==null 
+                                ? <Button variant="success">
+                                    Login
+                                </Button>
+                                :null }
+                        </Link>
+                        <Link to="/signup" className={classes.button}>
+                                {currentUser===null 
+                                    ? <Button variant="success">
+                                        Sign Up
+                                    </Button>
+                                :null }
+                        </Link>
+                        {currentUser!=null 
+                            ? <Button onClick={handleLogOut} variant="success">                     
+                                Logout
+                            </Button>
+                            : null
+                        }
+                        {currentUser!=null ? <p className={classes.loggedUser}>{currentUser.email} is logged in</p> : null}                                         
+                    </div>
+                </div>                     
             </Toolbar>
-        </AppBar>
-   
+        </AppBar>  
         </>
     ) 
 }
