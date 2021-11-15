@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { Link, useHistory, useLocation  } from 'react-router-dom';
-import { AuthContext } from '../auxiliary/AuthContext'
+import { AuthContext } from '../../auxiliary/AuthContext'
 //MATERIAL UI 
 import {makeStyles} from '@mui/styles'
 import {AppBar, Toolbar, Typography, InputBase, Button} from '@mui/material'

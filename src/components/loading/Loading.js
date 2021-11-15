@@ -1,6 +1,6 @@
 
 import React from 'react';
-import useGlobalStyles from '../styles/globalStyles';
+import useGlobalStyles from '../../styles/globalStyles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';

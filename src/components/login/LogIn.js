@@ -1,8 +1,8 @@
 
 import React, {useContext,useState} from 'react'
-import { AuthContext } from '../auxiliary/AuthContext'
-import useGlobalStyles from '../styles/globalStyles'
-import useWindowSize from '../auxiliary/useWindowSize'
+import { AuthContext } from '../../auxiliary/AuthContext'
+import useGlobalStyles from '../../styles/globalStyles'
+import useWindowSize from '../../auxiliary/useWindowSize'
 import { Link, useHistory } from 'react-router-dom';
 //MATERIAL UI 
 
@@ -12,8 +12,7 @@ import { Typography, TextField, Button, Paper, Alert } from '@mui/material'
     const [error, setError] = useState('')
     const [loading, setLoading] = useState()
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    
+    const [password, setPassword] = useState('')    
     const [alert,setAlert] = useState(false)
    
     const size = useWindowSize();

@@ -1,8 +1,8 @@
 
 import React, {useContext,useState} from 'react'
-import { AuthContext } from '../auxiliary/AuthContext'
-import useGlobalStyles from '../styles/globalStyles'
-import useWindowSize from '../auxiliary/useWindowSize'
+import { AuthContext } from '../../auxiliary/AuthContext'
+import useGlobalStyles from '../../styles/globalStyles'
+import useWindowSize from '../../auxiliary/useWindowSize'
 import { Link, useHistory } from 'react-router-dom';
 //MATERIAL UI 
 
@@ -15,7 +15,7 @@ export default function SignUp() {
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [alert,setAlert] = useState(false)
-    // const classes=useStyles();
+
     const size = useWindowSize();
     let windowWidth = size.width
     const globalClasses=useGlobalStyles({windowWidth});    

@@ -1,32 +1,9 @@
-
-import React from 'react'
+import useStyles from './styles'
 import useGlobalStyles from '../../styles/globalStyles';
 //MATERIAL UI 
-import {makeStyles} from '@mui/styles'
 import { Typography, Grid } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import QuantityField from './QuantityField';
-
-
-const useStyles = makeStyles((theme) => ({
-    container:{
-        display:"flex"
-    },
-    img:{
-        width:"80px",  
-        height:"80px", 
-        padding:theme.spacing(1),       
-    },
-    detailsContainer:{
-        display:"flex",
-        flexDirection:"row"
-    },
-    cancelIcon:{
-        cursor:"pointer"
-    },    
-  }));
-
-
 
 export default function CartItem({item, handleRemoveItem, handleIncreaseItem , handleDecreaseItem}) {
 

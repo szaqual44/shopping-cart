@@ -1,5 +1,4 @@
 
-import React from 'react'
 
 //MATERIAL UI 
 import {makeStyles} from '@mui/styles'
@@ -10,8 +9,7 @@ const useStyles = makeStyles((theme) => ({
         borderBottom:"2px solid grey",
     },
     paper:{
-        padding:theme.spacing(2),
-        
+        padding:theme.spacing(2),        
     },
     price:{
         display:"flex",
@@ -25,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function Total({totalPrice}) {
+export default function TotalPrice({totalPrice}) {
 
     const classes=useStyles();
     return (
@@ -38,8 +36,7 @@ export default function Total({totalPrice}) {
             </Typography>
             <div className={classes.buttonContainer}>   
                 <Button variant="contained"> BUY </Button>
-            </div>
-   
+            </div>   
         </Paper>
     )
 }

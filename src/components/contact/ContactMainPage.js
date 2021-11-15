@@ -1,58 +1,13 @@
 
-import React from 'react'
 import { Form, Field } from 'react-final-form'
-import useGlobalStyles from '../styles/globalStyles'
-import useWindowSize from '../auxiliary/useWindowSize'
+import useStyles from './styles'
+import useGlobalStyles from '../../styles/globalStyles'
+import useWindowSize from '../../auxiliary/useWindowSize'
 //MATERIAL UI 
 
 
 import {makeStyles} from '@mui/styles'
-import {Paper, Typography, Button, Container } from '@mui/material'
-
-const useStyles = makeStyles((theme) => ({       
-    active:{
-      backgroundColor:"#e6ebe6"  
-    },
-    fieldContainer:{
-        padding:20,
-        display:"flex",
-        justifyContent:"space-between",
-        position:"relative",
-        [theme.breakpoints.down("1000")]: {
-            flexDirection:"column",            
-          },
-    },
-    textContainer:{
-        padding:20,
-        paddingBottom:5,
-        display:"flex",
-        flexDirection:"column",
-    },
-    button:{
-        width:"100%",
-        marginTop:"110px"
-    },
-    input:{
-       border:"1px solid red",
-       borderRadius:"3px"
-    },
-    relative:{
-        position:'relative'
-    },
-    required:{         
-        position:"absolute",
-        right:10,
-       fontSize:"10px",
-       color:"red" 
-    },
-    label:{
-        marginRight:"10px",
-        [theme.breakpoints.down("1000")]: {
-            marginBottom:"10px"
-          },
-    }
-   
-  }));
+import {Paper, Typography, Button } from '@mui/material'
 
 
   function handleContactSubmit(values){
@@ -82,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   }
 
 
- export default function Contact() {
+ export default function ContactMainPage() {
     const classes=useStyles();
     const size = useWindowSize();
     let windowWidth = size.width

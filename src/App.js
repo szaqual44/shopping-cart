@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import  {useState,useEffect} from 'react'
 import useWindowSize from './auxiliary/useWindowSize';
 import useFetch from './auxiliary/useFetch'
-import Shop from "./components/shop/Shop";
-import LeftMenu from "./components/LeftMenu";
-import Navbar from "./components/Navbar";
-import Loading from "./components/Loading";
-import Cart from "./components/cart/Cart";
-import Contact from "./components/Contact";
-import SignUp from './components/SignUp';
-import LogIn from './components/LogIn';
+import ShopMainPage from "./components/shop/ShopMainPage";
+import LeftMenu from "./components/sidebar/LeftMenu";
+import Navbar from "./components/navbar/Navbar";
+import Loading from "./components/loading/Loading";
+import CartMainPage from "./components/cart/CartMainPage";
+import ContactMainPage from "./components/contact/ContactMainPage";
+import SignUp from './components/signup/SignUp';
+import LogIn from './components/login/LogIn';
 //MATERIA UI
 import {makeStyles} from '@mui/styles'
 import AuthProvider from './auxiliary/AuthContext';
@@ -89,13 +89,13 @@ function filterData(){
             { !isLoading ?                      
                 <Switch>
                   <Route exact path="/">
-                    <Shop data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />                     
+                    <ShopMainPage data={(filteredData!=undefined) ? filteredData : data} handleAddToBasket={handleAddToBasket} />                     
                   </Route>
                   <Route  path="/cart">
-                    <Cart />
+                    <CartMainPage />
                   </Route>
                   <Route  path="/contact">
-                    <Contact/>
+                    <ContactMainPage/>
                   </Route>
                   <Route  path="/signup">
                     <SignUp/>

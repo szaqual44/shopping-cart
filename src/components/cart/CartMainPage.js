@@ -1,28 +1,14 @@
-
 import React, { useState, useEffect} from 'react'
 import { storageKey } from '../../App';
 import CartItem from './CartItem';
 import useGlobalStyles from '../../styles/globalStyles';
 import useWindowSize from '../../auxiliary/useWindowSize';
+import useStyles from './styles'
 //MATERIAL UI 
-import {makeStyles, } from '@mui/styles'
 import { Grid, Typography,Paper } from '@mui/material'
-import Total from './Total';
+import TotalPrice from './TotalPrice';
 
-const useStyles = makeStyles((theme) => ({   
-    cartItem:{
-        marginBottom:"20px"
-    },
-    paper:{
-        padding:theme.spacing(2),  
-        minHeight:"400px",   
-        [theme.breakpoints.down('sm')]:{
-            width:"100%"
-        },  
-    }
-  }));
 
- 
 export default function Cart({handleRemoveItem}) {    
     const classes=useStyles();
     const size = useWindowSize();
@@ -44,7 +30,6 @@ export default function Cart({handleRemoveItem}) {
     function getCartItems(storageKey){
         let data = JSON.parse(localStorage.getItem(storageKey))
         if (data===null) data=[] 
-        // console.log(data)
         return data        
    }
     function handleRemoveItem(id){
@@ -130,7 +115,7 @@ export default function Cart({handleRemoveItem}) {
                 </Paper>
             </Grid>
             <Grid item md={4} sm={12} xs={12}>
-                <Total totalPrice={totalPrice}/>
+                <TotalPrice totalPrice={totalPrice}/>
             </Grid>
 
         </Grid>

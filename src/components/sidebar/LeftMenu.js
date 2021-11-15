@@ -1,6 +1,7 @@
-import React, { useState, useContext} from 'react'
-import { MyContextToggle } from '../styles/myTheme'
-import useGlobalStyles from '../styles/globalStyles'
+import React, { useContext} from 'react'
+import useStyles from './styles'
+import { MyContextToggle } from '../../styles/myTheme'
+import useGlobalStyles from '../../styles/globalStyles'
 //MATERIAL UI 
 import {makeStyles} from '@mui/styles'
 import { Button, List, ListItem, Typography } from '@mui/material'
@@ -10,30 +11,6 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Link } from 'react-router-dom';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-
-const useStyles = makeStyles((theme) => ({
-    list:{
-        height:"90%", 
-        display:"flex",
-        flexDirection:"column",
-        justifyContent:"space-between"
-    },
-    aside:{
-        position:"fixed",
-        backgroundColor:theme.palette.secondary.main,
-        display:"flex",
-        flexDirection:"column",
-        height:"100vh",       
-    },
-    textBox:{
-        color:"#fff",       
-    },
-    text:{
-        [theme.breakpoints.down("md")]: {
-            display:"none",
-          },
-    },
-  }));
 
 export default function LeftMenu() {
     const {toggleContext, isDark} = useContext(MyContextToggle)
